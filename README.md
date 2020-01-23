@@ -1,4 +1,4 @@
-# War Simulator
+![War Simulator](banner.png)
 
 ### Overview
 War Simulator is designed to simulate the card game, War, but on a much larger scale. A user can decide to run several games with several players and get the outcomes printed back to them. 
