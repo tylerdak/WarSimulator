@@ -135,7 +135,7 @@ def playGame(players):
         winner = max(comparedNumbers)
         winningPlayer = ""
 
-        if (cardNumbers.count(winner) > 1):
+        if (comparedNumbers.count(winner) > 1):
             cardPile.extend(cardsIn)
             return doWar(winner, comparedNumbers, cardPile, warPeople)
 
