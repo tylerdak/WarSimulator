@@ -1,7 +1,4 @@
 # War Simulator
-### by Tyler Dakin
-
-  
 
 ## Overview
 
