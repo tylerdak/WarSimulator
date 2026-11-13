@@ -1,5 +1,16 @@
 from main import *
 
+import math, os, sys, time
+
+class HiddenPrints:
+    def __enter__(self):
+        self._original_stdout = sys.stdout
+        sys.stdout = open(os.devnull, 'w')
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        sys.stdout.close()
+        sys.stdout = self._original_stdout
+
 def getPlayerCount():
     print("Number of players: ", end="")
     playerCount = input()
@@ -45,12 +56,23 @@ if (players == None) or (games == None):
 
 count = 0
 winCount = {}
+
+startTime = time.time()
+lastcheckpoint = -1
+
 while (count < games):
     count += 1
-    winner = playGame(players)
+    with HiddenPrints():
+        winner = playGame(players)
     if winner in list(winCount.keys()):
         winCount[winner] = winCount[winner] + 1
     else:
         winCount[winner] = 1
+    percentDone = max(round(((count / games) * 100), 2), 0.01)
+    currentDuration = time.time() - startTime
+    expectedRemaining = round(((currentDuration * 100) / percentDone) - currentDuration, 0)
+    if currentDuration - lastcheckpoint > 0.4:
+        lastcheckpoint = currentDuration
+        print((str)(percentDone) + "% done\t\t-\t\tETA: " + (str)(expectedRemaining) + "s")
 
 print(winCount)
